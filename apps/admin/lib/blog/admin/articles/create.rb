@@ -12,7 +12,8 @@ module Blog
           validation = FormSchema.(params)
 
           if validation.success?
-            Right(@article_repo.create(params))
+            article = article_repo.create(validation)
+            Right(article)
           else
             Left(validation)
           end

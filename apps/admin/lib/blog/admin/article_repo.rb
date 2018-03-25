@@ -1,11 +1,8 @@
-require 'blog/entities/article'
+require "blog/repository"
 
 module Blog
   module Admin
-    class ArticleRepo
-      def create(params)
-        Blog::Entities::Article.new(params)
-      end
+    class ArticleRepo < Blog::Repository[:articles]
     end
   end
 end
