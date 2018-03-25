@@ -1,18 +1,25 @@
 require "blog/repository"
+require_relative "entities"
 
 module Blog
   module Admin
     class ArticleRepo < Blog::Repository[:articles]
       commands :create, update: :by_pk
 
+      struct_namespace Entities
+
       def by_id(article_id)
-        articles.by_pk(article_id).map_to(Entities::Article).one!
+        articles.by_pk(article_id).one!
       end
 
       def listing
+        articles.order_by_created_at
+      end
+
+      private
+
+      def articles
         aggregate(:author)
-          .order { created_at.desc }
-          .map_to(Entities::Article)
       end
     end
   end

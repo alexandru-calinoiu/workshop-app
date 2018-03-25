@@ -6,6 +6,14 @@ module Persistence
           belongs_to :author
         end
       end
+
+      def published
+        by_status("published")
+      end
+
+      def order_by_created_at
+        order { created_at.desc }
+      end
     end
   end
 end
