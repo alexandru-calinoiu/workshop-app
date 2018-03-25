@@ -22,6 +22,11 @@ RSpec.describe Blog::Entities::Article do
           Blog::Entities::Article.new(attributes.merge(title: nil))
         }.to raise_error(Dry::Struct::Error)
       end
+
+      it "will clean it for spaces" do
+        title = Blog::Entities::Article.new(attributes.merge(title: "  Some title ")).title
+        expect(title).to eq("Some title")
+      end
     end
 
     describe "status:" do
