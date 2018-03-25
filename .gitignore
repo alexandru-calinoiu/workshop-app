@@ -10,3 +10,6 @@
 
 # Temp files
 tmp/*
+
+# Ruby mine stuff
+.idea
