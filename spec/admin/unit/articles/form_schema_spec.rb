@@ -44,7 +44,13 @@ RSpec.describe "Blog::Admin::Articles::FormSchema" do
       end
 
       it "accepts nil" do
-        expect(schema.(attributes.merge(published_at: nil))).to be_success
+        expect(schema.(attributes.merge(published_at: nil, status: "draft"))).to be_success
+      end
+
+      it "reject nil when status is published" do
+        result = schema.(attributes.merge(status: Types::ArticleStatus["published"], published_at: nil))
+
+        expect(result).to be_failure
       end
     end
   end
